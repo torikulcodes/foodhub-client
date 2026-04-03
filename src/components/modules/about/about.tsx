@@ -39,15 +39,14 @@ export default function About() {
               ensures fast, safe, and reliable delivery every time.
             </p>
           </CardContent>
-          <CardTitle >
-            Our Mission & Vision
-          </CardTitle>
+          <CardTitle>Our Mission & Vision</CardTitle>
           <CardContent className="text-muted-foreground">
             <p>
               Our mission at FoodHub is to revolutionize the way people access
               fresh and healthy food by leveraging technology and efficient
               logistics. We envision a world where everyone has easy access to
-              nutritious food options that support their well-being and lifestyle.
+              nutritious food options that support their well-being and
+              lifestyle.
             </p>
           </CardContent>
         </Card>

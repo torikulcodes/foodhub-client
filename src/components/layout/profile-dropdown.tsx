@@ -40,7 +40,7 @@ export function ProfileDropdown({ data }: { data?: UserSessionResponse }) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+            <AvatarImage src="https://github.com/shadcn.png" alt="profile image" />
             <AvatarFallback>LR</AvatarFallback>
           </Avatar>
         </Button>
@@ -55,7 +55,7 @@ export function ProfileDropdown({ data }: { data?: UserSessionResponse }) {
 
           <DropdownMenuItem>
             <CreditCardIcon />
-           <Link href="/dashboard"> Dashboard</Link>
+        <Link href="/customer-dashboard">Dashboard</Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem>

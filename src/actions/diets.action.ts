@@ -1,7 +1,4 @@
 "use server";
-
-
-
 import { dietsService } from "@/service/diets.service";
 import { CreateDiets } from "@/types/product.type";
 import { revalidatePath } from "next/cache";

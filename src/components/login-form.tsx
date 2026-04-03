@@ -68,50 +68,56 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      {/* <Card> */}
-      <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FieldGroup>
-            {/* email */}
-            <Field data-invalid={!!errors.email}>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input type="email" id="email" {...register("email")} />
-              {errors.email && (
-                <FieldError
-                  errors={[{ message: errors.email.message as string }]}
-                />
-              )}
-            </Field>
+    
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="scroll-m-20 text-xl font-semibold tracking-tight">Login to your account</CardTitle>
+            <CardDescription>
+              Enter your email below to login to your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FieldGroup>
+                {/* email */}
+                <Field data-invalid={!!errors.email}>
+                  <FieldLabel htmlFor="email">Email</FieldLabel>
+                  <Input type="email" id="email" {...register("email")} />
+                  {errors.email && (
+                    <FieldError
+                      errors={[{ message: errors.email.message as string }]}
+                    />
+                  )}
+                </Field>
 
-            <Field data-invalid={!!errors.password}>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input type="password" id="password" {...register("password")} />
-              {errors.password && (
-                <FieldError
-                  errors={[{ message: errors.password.message as string }]}
-                />
-              )}
-            </Field>
-            <Field>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Logging in..." : "Login"}
-              </Button>
+                <Field data-invalid={!!errors.password}>
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <Input
+                    type="password"
+                    id="password"
+                    {...register("password")}
+                  />
+                  {errors.password && (
+                    <FieldError
+                      errors={[{ message: errors.password.message as string }]}
+                    />
+                  )}
+                </Field>
+                <Field>
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Logging in..." : "Login"}
+                  </Button>
 
-              <FieldDescription className="text-center">
-                Don&apos;t have an account?{" "}
-                <Link href="/register">Sign up</Link>
-              </FieldDescription>
-            </Field>
-          </FieldGroup>
-        </form>
-      </CardContent>
-      {/* </Card> */}
+                  <FieldDescription className="text-center">
+                    Don&apos;t have an account?{" "}
+                    <Link href="/register">Sign up</Link>
+                  </FieldDescription>
+                </Field>
+              </FieldGroup>
+            </form>
+          </CardContent>
+        </Card>
+     
     </div>
   );
 }

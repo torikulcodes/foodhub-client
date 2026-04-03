@@ -10,7 +10,9 @@ export const proxy = async (request: NextRequest) => {
 
   const { data } = await userService.getSession();
 
-  console.log("data",data)
+  if (!data || !data.user) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   if (data && data.user) {
     isAuthenticated = true;
@@ -29,18 +31,29 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if(isAdmin && (pathName.startsWith("/customer-dashboard") || pathName.startsWith("/provider-dashboard"))) {
-    
+  if (
+    isAdmin &&
+    (pathName.startsWith("/customer-dashboard") ||
+      pathName.startsWith("/provider-dashboard"))
+  ) {
     return NextResponse.redirect(new URL("/admin-dashboard", request.url));
   }
 
-  if(isProvider && (pathName.startsWith("/admin-dashboard") || pathName.startsWith("/customer-dashboard"))) {
+  if (
+    isProvider &&
+    (pathName.startsWith("/admin-dashboard") ||
+      pathName.startsWith("/customer-dashboard"))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = "/provider-dashboard";
     return NextResponse.redirect(url);
   }
 
-  if(isCustomer && (pathName.startsWith("/provider-dashboard") || pathName.startsWith("/admin-dashboard"))) {
+  if (
+    isCustomer &&
+    (pathName.startsWith("/provider-dashboard") ||
+      pathName.startsWith("/admin-dashboard"))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
@@ -50,5 +63,9 @@ export const proxy = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ["/admin-dashboard/:path*", "/provider-dashboard/:path*", "/customer-dashboard/:path*"],
+  matcher: [
+    "/admin-dashboard/:path*",
+    "/provider-dashboard/:path*",
+    "/customer-dashboard/:path*",
+  ],
 };

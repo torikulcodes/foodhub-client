@@ -1,10 +1,11 @@
-import Login from '@/components/modules/authentication/login'
+
+import { LoginForm } from '@/components/login-form'
 import React from 'react'
 
 export default function page() {
   return (
-    <div>
-      <Login />
+    <div className='my-16 max-w-xl mx-auto min-h-[calc(100vh-664px)] flex flex-col justify-center'>
+    <LoginForm></LoginForm>
     </div>
   )
 }
