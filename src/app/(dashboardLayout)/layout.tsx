@@ -19,6 +19,8 @@ import {
 import { Roles } from "@/constans/roles";
 import { userService } from "@/service/user.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashBoardLayout({
   admin,
   customer,
@@ -30,6 +32,14 @@ export default async function DashBoardLayout({
 }) {
   const { data } = await userService.getSession();
   const userInfo = data?.user;
+
+  if (!userInfo || !userInfo.role) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-sm text-muted-foreground">Unauthorized or no session available.</p>
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>
