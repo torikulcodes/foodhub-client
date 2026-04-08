@@ -26,24 +26,15 @@ export const providerRoutes = [
       },
 
       {
-        title: "Categories",
-        url: "/provider-dashboard/categories",
-      },
-
-      {
-        title: "Dietary Preferences",
-        url: "/provider-dashboard/dietary-preferences",
-      },
-      {
         title: "Products",
         items: [
           {
-            title: "All Products",
+            title: "My Products",
             url: "/provider-dashboard/products",
           },
           {
             title: "Add Product",
-            url: "/provider-dashboard/products/add",
+            url: "/provider-dashboard/products/createProducts",
           },
         ],
       },

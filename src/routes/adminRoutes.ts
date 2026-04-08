@@ -7,6 +7,15 @@ export const adminRoutes = [
         title: "admin",
         url: "/analytics",
       },
+      {
+        title: "Categories",
+        url: "/admin-dashboard/categories",
+      },
+
+      {
+        title: "Dietary Preferences",
+        url: "/admin-dashboard/dietary-preferences",
+      },
     ],
   },
 ];

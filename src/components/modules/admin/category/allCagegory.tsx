@@ -24,7 +24,7 @@ import React from "react";
 export default function AllCagegory({ data }: { data: Category[] }) {
   console.log(data);
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="global_width mx-auto">
       <Card className="my-3">
         <CardContent>
           <Table className="">

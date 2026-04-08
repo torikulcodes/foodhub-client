@@ -1,5 +1,5 @@
-import AllDiets from "@/components/modules/provider/diets/allDiets";
-import { CreateDiets } from "@/components/modules/provider/diets/createDiets";
+import AllDiets from "@/components/modules/admin/diets/allDiets";
+import { CreateDiets } from "@/components/modules/admin/diets/createDiets";
 import { dietsService } from "@/service/diets.service";
 import React from "react";
 

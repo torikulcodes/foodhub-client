@@ -83,7 +83,7 @@ export function CreateCategory() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full global_width mx-auto">
       <Card >
         <CardHeader>
           <CardTitle>Create Category</CardTitle>
@@ -94,7 +94,7 @@ export function CreateCategory() {
 
         <CardContent>
           <form id="create-category" onSubmit={handleSubmit(onSubmit)}>
-            <FieldGroup>
+            <FieldGroup className="grid grid-cols-2 gap-4">
               {/* Name */}
               <Field data-invalid={!!errors.name}>
                 <FieldLabel>Name</FieldLabel>
@@ -122,9 +122,9 @@ export function CreateCategory() {
               </Field>
 
               {/* Description */}
-              <Field data-invalid={!!errors.description}>
+              <Field className="col-span-2 row-span-10" data-invalid={!!errors.description}>
                 <FieldLabel>Description</FieldLabel>
-                <Textarea
+                <Textarea className="h-full"
                   placeholder="Write description"
                   {...register("description")}
                 />

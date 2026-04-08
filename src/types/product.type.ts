@@ -39,5 +39,16 @@ export interface Diets {
 
 export type CreateDiets = {
   name: string;
-  description?: string | undefined
+  description?: string | undefined;
 };
+
+export interface CreateProducts {
+  name: string;
+  description?: string;
+  price: number;
+  categoryId: string;
+  stock?: number; // ✅ change here
+  discount?: number;
+  image?: string;
+  diets?: string[];
+}
