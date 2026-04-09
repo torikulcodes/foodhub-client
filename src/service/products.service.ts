@@ -66,34 +66,44 @@ export const productsService = {
     }
   },
 
-  getOwnProduct: async () => {
+  getOwnProduct: async (
+    searchTerm?: string,
+    categoryId?: string,
+    page: string = "1",
+    limit: string = "10",
+  ) => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}products/my-products`, {
+      const params = new URLSearchParams();
+
+      if (searchTerm) params.append("searchTerm", searchTerm);
+      if (categoryId && categoryId !== "all")
+        params.append("categoryId", categoryId);
+      params.append("page", page);
+      params.append("limit", limit);
+
+      const url = `${Base_URL}products/my-products?${params.toString()}`;
+      console.log("Fetching URL:", url); // URL টা ঠিক আছে কিনা কনসোলে দেখুন
+
+      const response = await fetch(url, {
+        method: "GET", // Method বলে দেওয়া ভালো
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        cache: "no-store", // ডাটা ক্যাশ হবে না, প্রতিবার নতুন ডাটা আসবে
       });
 
-      // যদি response.ok না হয়, অর্থাৎ 4xx বা 5xx status
       if (!response.ok) {
-        const text = await response.text(); // backend থেকে message
-        return {
-          data: null,
-          error: { message: text || "Failed to fetch categories" },
-        };
+        return { data: null, error: { message: "Failed to fetch" } };
       }
 
-      // সফল হলে JSON data return
-      const data = await response.json();
-      return { data, error: null };
+      const result = await response.json();
+      console.log("server product", result);
+
+      return { data: result, error: null };
     } catch (err) {
-      console.log("get category error", err);
-      return {
-        data: null,
-        error: { message: "Something went wrong" },
-      };
+      return { data: null, error: { message: "Something went wrong" } };
     }
   },
 
@@ -127,5 +137,4 @@ export const productsService = {
       };
     }
   },
-  
-}; 
+};

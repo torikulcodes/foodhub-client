@@ -54,7 +54,10 @@ interface CreateProductFormProps {
   diets: any[];
 }
 
-export function CreateProductForm({ categories, diets }: CreateProductFormProps) {
+export function CreateProductForm({
+  categories,
+  diets,
+}: CreateProductFormProps) {
   const {
     register,
     handleSubmit,
@@ -65,7 +68,6 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productsSchema) as any,
   });
-
 
   const selectedDiets = watch("diets") || [];
 
@@ -88,7 +90,7 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full global_width mx-auto">
       <Card>
         <CardHeader>
           <CardTitle>Create Product</CardTitle>
@@ -98,7 +100,6 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
         <CardContent>
           <form id="product-form" onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup className="grid grid-cols-2 gap-4">
-
               {/* Name */}
               <Field data-invalid={!!errors.name}>
                 <FieldLabel>Name</FieldLabel>
@@ -128,8 +129,12 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
               {/* Category */}
               <Field data-invalid={!!errors.categoryId}>
                 <FieldLabel>Category</FieldLabel>
+
                 <Select
-                  onValueChange={(value) => setValue("categoryId", value)}
+                  value={watch("categoryId")}
+                  onValueChange={(value) =>
+                    setValue("categoryId", value, { shouldValidate: true })
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
@@ -144,7 +149,9 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
                   </SelectContent>
                 </Select>
 
-                <FieldError errors={[{ message: errors.categoryId?.message }]} />
+                <FieldError
+                  errors={[{ message: errors.categoryId?.message }]}
+                />
               </Field>
 
               {/* Image */}
@@ -168,7 +175,7 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
                           } else {
                             setValue(
                               "diets",
-                              selectedDiets.filter((d) => d !== diet.id)
+                              selectedDiets.filter((d) => d !== diet.id),
                             );
                           }
                         }}
@@ -184,7 +191,6 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
                 <FieldLabel>Description</FieldLabel>
                 <Textarea {...register("description")} />
               </Field>
-
             </FieldGroup>
           </form>
         </CardContent>
@@ -194,7 +200,13 @@ export function CreateProductForm({ categories, diets }: CreateProductFormProps)
             type="submit"
             form="product-form"
             className="w-full"
-            disabled={isSubmitting}
+            disabled={
+              isSubmitting ||
+              !watch("categoryId") ||
+              !watch("name") ||
+              !watch("price") ||
+              !watch("image")
+            }
           >
             {isSubmitting ? "Submitting..." : "Create Product"}
           </Button>
