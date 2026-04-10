@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { ExternalLink, Headset, Mail, Menu, Phone } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -31,7 +31,8 @@ import { ModeToggle } from "./modeToggle";
 import Image from "next/image";
 import { UserSessionResponse } from "@/types/user.type";
 import { ProfileDropdown } from "./profile-dropdown";
-
+import { Card } from "../ui/card";
+import { Roles } from "@/constans/roles";
 
 interface MenuItem {
   title: string;
@@ -60,16 +61,8 @@ interface Navbar1Props {
   };
 }
 
-
-
-const Navbar = (
-  {
-  logo = {
-    src: "https://i.postimg.cc/XqkYWdJz/975c7d32-4b1e-4e9e-9f1e-bc251d60e468.png",
-  },
+const Navbar = ({
   menu = [
-    { title: "Home", url: "/" },
-
     {
       title: "Meals",
       url: "/meals",
@@ -90,72 +83,40 @@ const Navbar = (
   className,
   data,
 }: Navbar1Props & { data?: UserSessionResponse }) => {
+  console.log("navbar data", data);
 
-  console.log(data)
   return (
-    <section className={cn("py-2 ", className)}>
-      <div className="container mx-auto px-3">
-        {/* Desktop Menu */}
-        <nav className="hidden items-center justify-between lg:flex">
-          <div className="flex items-center gap-6">
-            {/* Logo */}
-
-            <div className="relative w-14 h-14">
-              <Image fill src={logo.src} alt="logo" />
-            </div>
-
-            <div className="flex gap-2 items-center">
-              {menu.map((item,index) => (<Link href={item.url} key={index}>{item.title}</Link>))}
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <ModeToggle></ModeToggle>
-
-            {data && data.user ? (
-              <ProfileDropdown data={data} />
-            ) : (
-              <>
-                <Button asChild variant="outline">
-                  <Link href={auth.login.url}>{auth.login.title}</Link> 
-                </Button>
-                <Button asChild>
-                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                </Button>
-              </>
-            )}
-          </div>
-        </nav>
-
-        {/* Mobile Menu */}
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="relative w-16 h-16">
-              <Image fill src={logo.src} alt="logo" />
-            </div>
-            <Sheet>
+    <section className={cn("relative", className)}>
+      {/* desktop Menu */}
+      <div>
+        <div className="md:flex hidden items-center justify-between bg-red-500 p-2">
+          <Sheet>
+            <div className="flex items-center gap-3">
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Menu className="size-4" />
-                </Button>
+                <Menu className="size-6" color="white" />
               </SheetTrigger>
-              <SheetContent className="overflow-y-auto">
+              <p className="font-['Playwrite_IE'] text-white">Hello World</p>
+            </div>
+
+            <SheetContent
+              side="left"
+              className="overflow-y-auto flex flex-col justify-between py-2"
+            >
+              <div>
                 <SheetHeader>
-                  <SheetTitle>
-                    <div className="relative w-16 h-16">
-                      <Image fill src={logo.src} alt="logo" />
-                    </div>
+                  <SheetTitle className="text-red-500 font-semibold border-b pb-2 border-red-200">
+                    FOODHUB
                   </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-6 p-4">
+                <div className="flex flex-col gap-6">
                   <Accordion
                     type="single"
                     collapsible
-                    className="flex w-full flex-col gap-4"
+                    className="flex w-full flex-col gap-2"
                   >
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-
+                  {/* 
                   <div className="flex flex-col gap-3">
                     <Button asChild variant="outline">
                       <Link href={auth.login.url}>{auth.login.title}</Link>
@@ -164,13 +125,44 @@ const Navbar = (
                       <Link href={auth.signup.url}>{auth.signup.title}</Link>
                     </Button>
                     <Button>Logout</Button>
-                  </div>
+                  </div> */}
                 </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                {/* helpline */}
+                <div className="flex justify-between bg-red-50 items-center p-1">
+                  <div className="flex items-center   gap-2.5">
+                    <Headset size={20} color="red" />
+                    <p className="font-semibold text-sm">FoodHub Helpline</p>
+                  </div>
+                  <ExternalLink size={20} className="text-gray-600" />
+                </div>
+                {/* email */}
+                <div className="flex justify-between bg-red-50 items-center p-1">
+                  <div className="flex items-center   gap-2.5">
+                    <Mail size={20} color="red" />
+                    <p className="font-semibold text-sm">
+                      mdtorikul908765@gmail.com
+                    </p>
+                  </div>
+                  <ExternalLink size={20} className="text-gray-600" />
+                </div>
+                {/* phone */}
+                <div className="flex justify-between bg-red-50 items-center p-1">
+                  <div className="flex items-center   gap-2.5">
+                    <Phone size={20} color="red" />
+                    <p className="font-semibold text-sm">01330111785</p>
+                  </div>
+                  <ExternalLink size={20} className="text-gray-600" />
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
+
+      {/* mobile menu */}
     </section>
   );
 };

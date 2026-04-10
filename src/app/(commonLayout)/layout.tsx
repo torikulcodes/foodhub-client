@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/footer";
+import MobileMenu from "@/components/layout/mobile-menu";
 import { Navbar } from "@/components/layout/navbar";
 import { userService } from "@/service/user.service";
 import React from "react";
@@ -15,10 +16,11 @@ export default async function layout({
 
   // console.log(session)
   return (
-    <div suppressHydrationWarning>
-      <Navbar data={session.data} className="sticky top-0 z-50 w-full backdrop-blur-2xl"></Navbar>
+    <div suppressHydrationWarning className="bg-red-50">
+      <Navbar data={session.data} className="sticky top-0 z-50 w-full backdrop-blur-2xl "></Navbar>
       {children}
       <Footer></Footer>
+      <MobileMenu/>
     </div>
   );
 }
