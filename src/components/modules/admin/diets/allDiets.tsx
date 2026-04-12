@@ -22,7 +22,7 @@ import { MoreHorizontalIcon } from "lucide-react";
 import React from "react";
 
 export default function AllDiets({ data }: { data: Diets[] }) {
-  console.log(data);
+
   return (
     <div className="max-w-4xl mx-auto">
       <Card className="my-3">

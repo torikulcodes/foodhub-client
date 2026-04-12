@@ -8,7 +8,6 @@ import React from "react";
 export default async function Categories() {
   const {data} = await categoryService.getAllCategory();
 
-  console.log(data);
   return (
     <div>
       <CreateCategory></CreateCategory>

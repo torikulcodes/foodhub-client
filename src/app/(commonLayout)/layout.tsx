@@ -16,7 +16,7 @@ export default async function layout({
 
   // console.log(session)
   return (
-    <div suppressHydrationWarning className="bg-red-50">
+    <div suppressHydrationWarning className="bg-pink-100">
       <Navbar data={session.data} className="sticky top-0 z-50 w-full backdrop-blur-2xl "></Navbar>
       {children}
       <Footer></Footer>

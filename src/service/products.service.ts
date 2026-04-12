@@ -35,34 +35,48 @@ export const productsService = {
     }
   },
 
-  getAllProduct: async () => {
+  getAllProduct: async (
+    searchTerm?: string,
+    categoryId?: string,
+    dietId?: string,
+    page: string = "1",
+    limit: string = "10",
+  ) => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}products`, {
+      const params = new URLSearchParams();
+
+      if (searchTerm) params.append("searchTerm", searchTerm);
+      if (categoryId && categoryId !== "all")
+        params.append("categoryId", categoryId);
+      if (dietId && dietId !== "all") params.append("dietId", dietId);
+      params.append("page", page);
+      params.append("limit", limit);
+
+      const url = `${Base_URL}products?${params.toString()}`;
+
+      const response = await fetch(url, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),
         },
+        cache: "no-store",
       });
 
-      // যদি response.ok না হয়, অর্থাৎ 4xx বা 5xx status
       if (!response.ok) {
-        const text = await response.text(); // backend থেকে message
+        const text = await response.text();
         return {
           data: null,
-          error: { message: text || "Failed to fetch categories" },
+          error: { message: text || "Failed to fetch products" },
         };
       }
 
-      // সফল হলে JSON data return
       const data = await response.json();
       return { data, error: null };
     } catch (err) {
-      console.log("get category error", err);
-      return {
-        data: null,
-        error: { message: "Something went wrong" },
-      };
+      console.log("get products error", err);
+      return { data: null, error: { message: "Something went wrong" } };
     }
   },
 

@@ -57,7 +57,6 @@ export const dietsService = {
       const data = await response.json();
       return { data, error: null };
     } catch (err) {
-      console.log("get category error", err);
       return {
         data: null,
         error: { message: "Something went wrong" },

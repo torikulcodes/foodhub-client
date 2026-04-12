@@ -9,8 +9,7 @@ export default async function ProductDetails({ params }: any) {
 
   const productsRes = await productsService.getProductById(id);
 
-  console.log("id", id);
-  console.log("details data", productsRes.data);
+
 
   return (
     <div>

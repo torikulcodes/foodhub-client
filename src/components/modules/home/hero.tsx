@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <Carousel
       opts={{ align: "start" }}
-      className="w-full max-w-[1800px] mx-auto px-2"
+      className="w-full max-w-[1800px] mx-auto px-2 my-10"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (

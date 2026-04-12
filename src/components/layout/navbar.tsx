@@ -1,6 +1,15 @@
 "use client";
 
-import { ExternalLink, Headset, Mail, Menu, Phone } from "lucide-react";
+import {
+  ExternalLink,
+  Headset,
+  Mail,
+  Menu,
+  Phone,
+  Search,
+  ShoppingCart,
+  UserRoundPen,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -33,6 +42,9 @@ import { UserSessionResponse } from "@/types/user.type";
 import { ProfileDropdown } from "./profile-dropdown";
 import { Card } from "../ui/card";
 import { Roles } from "@/constans/roles";
+import { useScrollStore } from "@/helper/globalState/scroll";
+import { Input } from "../ui/input";
+import { useFilterStore } from "@/helper/globalState/searchAndFilter";
 
 interface MenuItem {
   title: string;
@@ -83,19 +95,47 @@ const Navbar = ({
   className,
   data,
 }: Navbar1Props & { data?: UserSessionResponse }) => {
-  console.log("navbar data", data);
+  const showSearchbar = useScrollStore((state) => state.showNavbar);
+  const { searchTerm, setSearchTerm } = useFilterStore();
 
   return (
     <section className={cn("relative", className)}>
       {/* desktop Menu */}
       <div>
-        <div className="md:flex hidden items-center justify-between bg-red-500 p-2">
+        <div className="items-center justify-between bg-pink-700 shadow p-4">
           <Sheet>
-            <div className="flex items-center gap-3">
-              <SheetTrigger asChild>
-                <Menu className="size-6" color="white" />
-              </SheetTrigger>
-              <p className="font-['Playwrite_IE'] text-white">Hello World</p>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <SheetTrigger asChild>
+                  <Menu className="size-6 hidden sm:flex" color="white" />
+                </SheetTrigger>
+                <p className="font-['Playwrite_IE'] text-white">FOODHUB BD</p>
+              </div>
+
+              {showSearchbar ? (
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-600" />
+                  <Input
+                    value={searchTerm} // <-- ADD THIS
+                    onChange={(e) => setSearchTerm(e.target.value)} // <-- ADD THIS
+                    placeholder="Search product..."
+                    className="pl-9 h-10 border-0 bg-white rounded-3xl md:w-[400px] text-gray-700 font-semibold"
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+
+              <div className="sm:flex gap-5 hidden ">
+                <div className="flex flex-col justify-center items-center text-white font-semibold cursor-pointer">
+                  <p>Profile</p>
+                  <UserRoundPen size={20} />
+                </div>
+                <div className="flex flex-col justify-center items-center text-white font-semibold cursor-pointer">
+                  <p>Cart</p>
+                  <ShoppingCart size={20} />
+                </div>
+              </div>
             </div>
 
             <SheetContent

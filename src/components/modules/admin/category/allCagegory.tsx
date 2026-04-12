@@ -22,7 +22,7 @@ import { MoreHorizontalIcon } from "lucide-react";
 import React from "react";
 
 export default function AllCagegory({ data }: { data: Category[] }) {
-  console.log(data);
+
   return (
     <div className="global_width mx-auto">
       <Card className="my-3">
