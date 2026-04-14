@@ -37,7 +37,7 @@ export default function BannerAndSearch() {
           "url('https://i.postimg.cc/sX5sgV9k/homepage-promotion.png')",
       }}
     >
-      <div className="absolute inset-0 bg-pink-700/70 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-pink-600/70 backdrop-blur-sm"></div>
 
       <div className="absolute text-white flex flex-col justify-center items-center h-full w-full">
         <h2 className="text-2xl font-bold text-center">

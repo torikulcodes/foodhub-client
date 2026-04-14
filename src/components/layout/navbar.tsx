@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -71,6 +72,8 @@ interface Navbar1Props {
       url: string;
     };
   };
+  data?: UserSessionResponse;
+  cartItem?: any;
 }
 
 const Navbar = ({
@@ -94,15 +97,18 @@ const Navbar = ({
   },
   className,
   data,
-}: Navbar1Props & { data?: UserSessionResponse }) => {
+  cartItem,
+}: Navbar1Props) => {
   const showSearchbar = useScrollStore((state) => state.showNavbar);
   const { searchTerm, setSearchTerm } = useFilterStore();
 
+  console.log(cartItem);
+
   return (
-    <section className={cn("relative", className)}>
+    <section className={cn("relative w-full", className)}>
       {/* desktop Menu */}
       <div>
-        <div className="items-center justify-between bg-pink-700 shadow p-4">
+        <div className="items-center justify-between bg-pink-600 shadow p-3">
           <Sheet>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
@@ -126,15 +132,23 @@ const Navbar = ({
                 ""
               )}
 
-              <div className="sm:flex gap-5 hidden ">
+              <div className="sm:flex gap-5 hidden mr-4">
                 <div className="flex flex-col justify-center items-center text-white font-semibold cursor-pointer">
+                  <UserRoundPen size={18} />
                   <p>Profile</p>
-                  <UserRoundPen size={20} />
                 </div>
-                <div className="flex flex-col justify-center items-center text-white font-semibold cursor-pointer">
+                <Link
+                  href="/customer-dashboard/cart"
+                  className="flex relative flex-col justify-center items-center text-white font-semibold cursor-pointer"
+                >
+                  <ShoppingCart size={18} />
                   <p>Cart</p>
-                  <ShoppingCart size={20} />
-                </div>
+                  {cartItem > 0 && (
+                    <span className="bg-white w-6 h-6 text-pink-600 rounded-full flex justify-center items-center absolute -right-3 -top-2 text-xs">
+                      {cartItem}
+                    </span>
+                  )}
+                </Link>
               </div>
             </div>
 
@@ -203,6 +217,44 @@ const Navbar = ({
       </div>
 
       {/* mobile menu */}
+
+      <div className="fixed bottom-2 left-2 right-2 z-[999]  border-2 border-pink-600 p-4 rounded-[300px] bg-white sm:hidden flex justify-around items-end gap-4">
+        <Link
+          href="/"
+          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+        >
+          <ShoppingCart size={15} />
+          <p className="text-sm">Home</p>
+        </Link>
+
+        <Link
+          href="/customer-dashboard/cart"
+          className="flex relative flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+        >
+          <ShoppingCart size={15} />
+          <p className="text-sm">Cart</p>
+          {cartItem > 0 && (
+            <span className=" w-5 h-5 bg-pink-600 text-white rounded-full flex justify-center items-center absolute -right-2 -top-3 text-xs">
+              {cartItem}
+            </span>
+          )}
+        </Link>
+
+        <Link
+          href="/customer-dashboard/category"
+          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+        >
+          <ShoppingCart size={15} />
+          <p className="text-sm">Category</p>
+        </Link>
+        <Link
+          href="/customer-dashboard/profile"
+          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+        >
+          <ShoppingCart size={15} />
+          <p className="text-sm">Profile</p>
+        </Link>
+      </div>
     </section>
   );
 };

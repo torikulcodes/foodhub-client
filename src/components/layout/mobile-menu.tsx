@@ -22,7 +22,7 @@ export default function MobileMenu() {
     },
   ];
   return (
-    <div className="relative p-2.5 flex md:hidden">
+    <div className="relative p-2.5 flex sm:hidden">
       <div className="fixed bottom-0 left-0 right-0 z-40">
         <div className="bg-white backdrop-blur-2xl w-full flex  justify-center items-center border-t-2 border-red-400 p-3">
           <div className="flex items-center justify-around w-full">

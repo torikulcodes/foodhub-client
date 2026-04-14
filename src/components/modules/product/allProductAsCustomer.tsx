@@ -8,7 +8,13 @@ import { fetchProductsAction } from "@/actions/products.action";
 
 import { Loader2 } from "lucide-react";
 import { ProductSkeleton } from "./productSkeleton";
+import { ProductCard } from "./productCard";
+import { usePathname } from "next/navigation";
 
+interface diest {
+  id: string;
+  name: string;
+}
 interface Product {
   id: string;
   name: string;
@@ -18,14 +24,15 @@ interface Product {
   isActive: boolean;
   description: string;
   stock: number;
+  diets: diest[];
   categoryId: string;
   providerId: string;
 }
 
 interface OwnProductsProps {
   initialProducts: Product[];
-  categories: { id: string; name: string }[];
-  diets: { id: string; name: string }[];
+  categories?: { id: string; name: string }[];
+  diets?: { id: string; name: string }[];
 }
 
 export default function AllProductAsCustomer({
@@ -40,6 +47,8 @@ export default function AllProductAsCustomer({
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
+  const isProductDetailPage = pathname.includes("/productsDetails/");
 
   const isInitialMount = useRef(true);
   const observerRef = useRef<HTMLDivElement>(null);
@@ -49,6 +58,8 @@ export default function AllProductAsCustomer({
       isInitialMount.current = false;
       return;
     }
+
+    if (isProductDetailPage) return;
 
     const delayDebounce = setTimeout(async () => {
       setLoading(true);
@@ -110,7 +121,13 @@ export default function AllProductAsCustomer({
 
   return (
     <div className="mx-auto global_width">
-      <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-end">
+      <div
+        className={
+          isProductDetailPage
+            ? `hidden`
+            : `flex flex-col sm:flex-row gap-4 mb-8 justify-end`
+        }
+      >
         <select
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
@@ -139,29 +156,12 @@ export default function AllProductAsCustomer({
           ))}
         </select>
       </div>
-      {/* Product Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 sm:gap-2 md:gap-3">
-        {products.map((product) => (
-          <Card key={product.id} className="p-1 flex flex-col gap-3 group">
-            <div className="w-full h-50 sm:h-60 bg-gray-100 rounded-md relative overflow-hidden">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                sizes="(max-width: 768px) 50vw, 16vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-            <div className="p-2">
-              <h3 className="font-bold text-sm sm:text-base line-clamp-1">
-                {product.name}
-              </h3>
-              <p className="text-pink-600 font-bold">৳ {product.price}</p>
-            </div>
-          </Card>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 sm:gap-1 md:gap-2">
+        {products.map((item) => (
+          <ProductCard key={item.id} product={item} />
         ))}
 
-        {/* লোড হওয়ার সময় Skeleton দেখানো */}
         {loading &&
           Array.from({ length: 6 }).map((_, i) => <ProductSkeleton key={i} />)}
       </div>
@@ -179,7 +179,7 @@ export default function AllProductAsCustomer({
         )}
         {!hasMore && products.length > 0 && (
           <p className="text-gray-400 italic">
-            {`You've reached the end of the list ✨`}
+            {`You've reached the end of the list`}
           </p>
         )}
       </div>

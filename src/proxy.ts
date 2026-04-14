@@ -31,6 +31,10 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  if (!isAuthenticated && pathName.startsWith("/customer-dashboard")) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
   if (
     isAdmin &&
     (pathName.startsWith("/customer-dashboard") ||
@@ -39,11 +43,7 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/admin-dashboard", request.url));
   }
 
-  if (
-    isProvider &&
-    (pathName.startsWith("/admin-dashboard") ||
-      pathName.startsWith("/customer-dashboard"))
-  ) {
+  if (isProvider && pathName.startsWith("/admin-dashboard")) {
     const url = request.nextUrl.clone();
     url.pathname = "/provider-dashboard";
     return NextResponse.redirect(url);

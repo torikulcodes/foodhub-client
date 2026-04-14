@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer";
 import About from "@/components/modules/about/about";
 import HowItWorks from "@/components/modules/about/howItWorks";
 import WhyChooseUs from "@/components/modules/about/whyChose";
@@ -14,7 +15,13 @@ export default async function page() {
   // Initial page load এর সময় প্রথম ১০টি প্রোডাক্ট নিয়ে আসছি
   const catRes = await categoryService.getAllCategory();
   const dietsRes = await dietsService.getAllDiets();
-  const productsRes = await productsService.getAllProduct("", "all", "all", "1", "10");
+  const productsRes = await productsService.getAllProduct(
+    "",
+    "all",
+    "all",
+    "1",
+    "10",
+  );
 
   const initialProducts = productsRes.data?.data || [];
   const categories = catRes.data?.data || [];
@@ -24,15 +31,16 @@ export default async function page() {
     <div className="w-full">
       <BannerAndSearch />
       <Hero />
-      <AllProductAsCustomer 
-         initialProducts={initialProducts} 
-         categories={categories} 
-         diets={diets} 
+      <AllProductAsCustomer
+        initialProducts={initialProducts}
+        categories={categories}
+        diets={diets}
       />
       <Policy />
       <HowItWorks />
       <About />
       <WhyChooseUs />
+      <Footer></Footer>
     </div>
   );
 }
