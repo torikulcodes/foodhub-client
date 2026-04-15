@@ -112,7 +112,6 @@ const Navbar = ({
 
   const [open, setOpen] = useState(false);
 
-  console.log(cartItem);
 
   return (
     <section className={cn("relative w-full", className)}>

@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 
 export const cartService = {
   addToCart: async (productId: string, qty: number) => {
-    console.log(productId, qty, "currently");
 
     
     const cookieStore = await cookies();

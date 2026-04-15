@@ -45,6 +45,7 @@ export const categoryService = {
         },
       });
 
+
       // যদি response.ok না হয়, অর্থাৎ 4xx বা 5xx status
       if (!response.ok) {
         const text = await response.text(); // backend থেকে message

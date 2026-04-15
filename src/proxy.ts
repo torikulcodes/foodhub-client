@@ -10,7 +10,6 @@ export async function proxy(request: NextRequest) {
 
   const { data } = await userService.getSession();
 
-  console.log(data);
   if (!data || !data.user) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

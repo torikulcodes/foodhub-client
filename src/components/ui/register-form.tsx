@@ -46,7 +46,6 @@ export function Registerform({ ...props }: React.ComponentProps<typeof Card>) {
     try {
       const { data, error } = await authClient.signUp.email(value);
 
-      console.log(data, error);
       if (error) {
         toast.error(error.message, { id: toastId });
         return;

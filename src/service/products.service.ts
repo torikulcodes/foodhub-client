@@ -97,7 +97,6 @@ export const productsService = {
       params.append("limit", limit);
 
       const url = `${Base_URL}/products/my-products?${params.toString()}`;
-      console.log("Fetching URL:", url); // URL টা ঠিক আছে কিনা কনসোলে দেখুন
 
       const response = await fetch(url, {
         method: "GET", // Method বলে দেওয়া ভালো
@@ -113,7 +112,6 @@ export const productsService = {
       }
 
       const result = await response.json();
-      console.log("server product", result);
 
       return { data: result, error: null };
     } catch (err) {
