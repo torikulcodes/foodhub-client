@@ -23,7 +23,6 @@ export default async function DashBoardLayout({
   provider,
 }: {
   admin: React.ReactNode;
-  customer: React.ReactNode;
   provider: React.ReactNode;
 }) {
   const { data } = await userService.getSession();
