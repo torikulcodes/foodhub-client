@@ -7,7 +7,7 @@ export const categoryService = {
     try {
       const cookieStore = await cookies();
 
-      const response = await fetch(`${Base_URL}category`, {
+      const response = await fetch(`${Base_URL}/category`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const categoryService = {
   getAllCategory: async () => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}category`, {
+      const response = await fetch(`${Base_URL}/category`, {
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),

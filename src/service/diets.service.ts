@@ -7,7 +7,7 @@ export const dietsService = {
     try {
       const cookieStore = await cookies();
 
-      const response = await fetch(`${Base_URL}diets`, {
+      const response = await fetch(`${Base_URL}/diets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const dietsService = {
   getAllDiets: async () => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}diets`, {
+      const response = await fetch(`${Base_URL}/diets`, {
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),

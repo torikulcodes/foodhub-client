@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 export const createProfile = async (data: ProfileFormData) => {
   try {
     const cookieStore = await cookies();
-    const response = await fetch(`${Base_URL}providerProfile`, {
+    const response = await fetch(`${Base_URL}/providerProfile`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const createProfile = async (data: ProfileFormData) => {
 export const updateProfile = async (data: ProfileFormData) => {
   try {
     const cookieStore = await cookies();
-    const response = await fetch(`${Base_URL}providerProfile`, {
+    const response = await fetch(`${Base_URL}/providerProfile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const updateProfile = async (data: ProfileFormData) => {
 export const getMyProfile = async () => {
   try {
     const cookieStore = await cookies();
-    const response = await fetch(`${Base_URL}providerProfile`, {
+    const response = await fetch(`${Base_URL}/providerProfile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { userService } from "./service/user.service";
 
-export const proxy = async (request: NextRequest) => {
+export async function proxy(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
   let isAuthenticated = false;
   let isAdmin = false;
@@ -10,6 +10,7 @@ export const proxy = async (request: NextRequest) => {
 
   const { data } = await userService.getSession();
 
+  console.log(data);
   if (!data || !data.user) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -60,7 +61,7 @@ export const proxy = async (request: NextRequest) => {
   }
 
   return NextResponse.next();
-};
+}
 
 export const config = {
   matcher: [

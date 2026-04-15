@@ -7,7 +7,7 @@ export const productsService = {
     try {
       const cookieStore = await cookies();
 
-      const response = await fetch(`${Base_URL}products`, {
+      const response = await fetch(`${Base_URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const productsService = {
       params.append("page", page);
       params.append("limit", limit);
 
-      const url = `${Base_URL}products?${params.toString()}`;
+      const url = `${Base_URL}/products?${params.toString()}`;
 
       const response = await fetch(url, {
         method: "GET",
@@ -96,7 +96,7 @@ export const productsService = {
       params.append("page", page);
       params.append("limit", limit);
 
-      const url = `${Base_URL}products/my-products?${params.toString()}`;
+      const url = `${Base_URL}/products/my-products?${params.toString()}`;
       console.log("Fetching URL:", url); // URL টা ঠিক আছে কিনা কনসোলে দেখুন
 
       const response = await fetch(url, {
@@ -124,7 +124,7 @@ export const productsService = {
   getProductById: async (id: string) => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}products/${id}`, {
+      const response = await fetch(`${Base_URL}/products/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Cookie: cookieStore.toString(),

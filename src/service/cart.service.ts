@@ -9,7 +9,7 @@ export const cartService = {
     
     const cookieStore = await cookies();
     try {
-      const response = await fetch(`${Base_URL}cart`, {
+      const response = await fetch(`${Base_URL}/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const cartService = {
   getCartItems: async () => {
     try {
       const cookieStore = await cookies();
-      const response = await fetch(`${Base_URL}cart`, {
+      const response = await fetch(`${Base_URL}/cart`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const cartService = {
   deleteCartItem: async (itemId: string) => {
     const cookieStore = await cookies();
     try {
-      const response = await fetch(`${Base_URL}cart/${itemId}`, {
+      const response = await fetch(`${Base_URL}/cart/${itemId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
