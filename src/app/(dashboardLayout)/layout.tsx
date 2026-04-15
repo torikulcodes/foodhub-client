@@ -3,14 +3,11 @@ import { ModeToggle } from "@/components/layout/modeToggle";
 import { ProfileDropdown } from "@/components/layout/profile-dropdown";
 
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
+
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
+
 } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
+
 import {
   SidebarInset,
   SidebarProvider,
@@ -23,7 +20,6 @@ export const dynamic = "force-dynamic";
 
 export default async function DashBoardLayout({
   admin,
-  customer,
   provider,
 }: {
   admin: React.ReactNode;
@@ -36,7 +32,9 @@ export default async function DashBoardLayout({
   if (!userInfo || !userInfo.role) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-sm text-muted-foreground">Unauthorized or no session available.</p>
+        <p className="text-sm text-muted-foreground">
+          Unauthorized or no session available.
+        </p>
       </div>
     );
   }
@@ -56,14 +54,11 @@ export default async function DashBoardLayout({
         <div className="flex flex-1 flex-col gap-4 p-4">
           {userInfo.role === Roles.ADMIN ? (
             admin
-          ) : userInfo.role === Roles.CUSTOMER ? (
-            customer
           ) : userInfo.role === Roles.PROVIDER ? (
             provider
           ) : (
             <div>Unauthorized</div>
           )}
-      
         </div>
       </SidebarInset>
     </SidebarProvider>
