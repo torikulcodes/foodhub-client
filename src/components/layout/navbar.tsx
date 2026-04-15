@@ -4,11 +4,14 @@
 import {
   ExternalLink,
   Headset,
+  Home,
+  LayoutGrid,
   Mail,
   Menu,
   Phone,
   Search,
   ShoppingCart,
+  User,
   UserRoundPen,
 } from "lucide-react";
 
@@ -46,6 +49,8 @@ import { Roles } from "@/constans/roles";
 import { useScrollStore } from "@/helper/globalState/scroll";
 import { Input } from "../ui/input";
 import { useFilterStore } from "@/helper/globalState/searchAndFilter";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 interface MenuItem {
   title: string;
@@ -88,7 +93,7 @@ const Navbar = ({
     },
     {
       title: "Dashboard",
-      url: "/customer-dashboard",
+      url: "/provider-dashboard",
     },
   ],
   auth = {
@@ -99,8 +104,13 @@ const Navbar = ({
   data,
   cartItem,
 }: Navbar1Props) => {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
   const showSearchbar = useScrollStore((state) => state.showNavbar);
   const { searchTerm, setSearchTerm } = useFilterStore();
+
+  const [open, setOpen] = useState(false);
 
   console.log(cartItem);
 
@@ -109,7 +119,7 @@ const Navbar = ({
       {/* desktop Menu */}
       <div>
         <div className="items-center justify-between bg-pink-600 shadow p-3">
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <SheetTrigger asChild>
@@ -221,38 +231,51 @@ const Navbar = ({
       <div className="fixed bottom-2 left-2 right-2 z-[999]  border-2 border-pink-600 p-4 rounded-[300px] bg-white sm:hidden flex justify-around items-end gap-4">
         <Link
           href="/"
-          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+          className={`flex flex-col cursor-pointer hover:scale-105 duration-300  items-center justify-center font-semibold ${
+            isActive("/") ? "text-pink-600" : "text-gray-400"
+          }`}
         >
-          <ShoppingCart size={15} />
-          <p className="text-sm">Home</p>
+          <Home size={18} />
+          <p className="text-xs">Home</p>
         </Link>
 
         <Link
           href="/customer-dashboard/cart"
-          className="flex relative flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+          className={`flex relative flex-col cursor-pointer hover:scale-105 duration-300  items-center justify-center font-semibold ${
+            isActive("/customer-dashboard/cart")
+              ? "text-pink-600"
+              : "text-gray-400"
+          }`}
         >
-          <ShoppingCart size={15} />
-          <p className="text-sm">Cart</p>
+          <ShoppingCart size={18} />
+
+          <p className="text-xs">Cart</p>
+
           {cartItem > 0 && (
-            <span className=" w-5 h-5 bg-pink-600 text-white rounded-full flex justify-center items-center absolute -right-2 -top-3 text-xs">
+            <span className="absolute -right-2 -top-2 w-5 h-5 bg-pink-600 text-white text-xs rounded-full flex items-center justify-center">
               {cartItem}
             </span>
           )}
         </Link>
 
-        <Link
-          href="/customer-dashboard/category"
-          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+        <div
+          className={`flex flex-col items-center hover:scale-105 duration-300 cursor-pointer  justify-center font-semibold `}
+          onClick={() => setOpen(!open)}
         >
-          <ShoppingCart size={15} />
-          <p className="text-sm">Category</p>
-        </Link>
+          <LayoutGrid size={18} />
+          <p className="text-xs">Category</p>
+        </div>
+
         <Link
           href="/customer-dashboard/profile"
-          className="flex flex-col justify-center items-center text-pink-600 font-semibold cursor-pointer"
+          className={`flex flex-col items-center cursor-pointer hover:scale-105 duration-300 justify-center font-semibold ${
+            isActive("/customer-dashboard/profile")
+              ? "text-pink-600"
+              : "text-gray-400"
+          }`}
         >
-          <ShoppingCart size={15} />
-          <p className="text-sm">Profile</p>
+          <User size={18} />
+          <p className="text-xs">Profile</p>
         </Link>
       </div>
     </section>
