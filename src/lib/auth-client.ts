@@ -1,12 +1,10 @@
 import { createAuthClient } from "better-auth/react"; // make sure to import from better-auth/react
 
 export const authClient = createAuthClient({
-  //you can pass client configuration here
-  // baseURL: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth`,
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL
-    ? process.env.NEXT_PUBLIC_BACKEND_URL
-    : "/api/auth",
-  fetchOptions: { credentials: "include" },
+  baseURL: typeof window !== "undefined" ? window.location.origin : "",
+  fetchOptions: {
+    credentials: "include",
+  },
 
   plugins: [
     {
