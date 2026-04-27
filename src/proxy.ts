@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { userService } from "./service/user.service";
 
+const privatePaths = [
+  "/admin-dashboard",
+  "/provider-dashboard",
+  "/customer-dashboard",
+];
+
 export async function proxy(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
   let isAuthenticated = false;
@@ -12,6 +18,19 @@ export async function proxy(request: NextRequest) {
 
   if (!data || !data.user) {
     return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  const isPrivatePath = privatePaths.some((path) => pathName.startsWith(path));
+
+  if (isPrivatePath) {
+    const token =
+      request.cookies.get("__Secure-session_token") ||
+      request.cookies.get("session_token");
+
+    if (!token) {
+      console.log("No token found. Redirecting...");
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
   }
 
   if (data && data.user) {
