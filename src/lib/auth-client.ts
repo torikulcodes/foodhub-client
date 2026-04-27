@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: "https://foodhub-client-eta.vercel.app"+"/api/auth",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL!,
   fetchOptions: {
     credentials: "include",
   },
