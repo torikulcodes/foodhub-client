@@ -25,6 +25,7 @@ export const metadata: Metadata = {
       "https://i.postimg.cc/XqkYWdJz/975c7d32-4b1e-4e9e-9f1e-bc251d60e468.png",
     apple:
       "https://i.postimg.cc/XqkYWdJz/975c7d32-4b1e-4e9e-9f1e-bc251d60e468.png",
+      
   },
 };
 

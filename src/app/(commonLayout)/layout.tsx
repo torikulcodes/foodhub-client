@@ -18,7 +18,7 @@ export default async function layout({
   return (
     <div
       suppressHydrationWarning
-      className="bg-pink-100 pb-20 sm:pb-0 min-h-screen flex flex-col"
+      className="bg-pink-50 pb-20 sm:pb-0 min-h-screen flex flex-col"
     >
       <Navbar
         data={session.data}

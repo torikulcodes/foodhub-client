@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { toast } from "sonner";
 import * as z from "zod";
+import { useRouter } from "next/router";
 
 const formSchema = z.object({
   name: z.string().min(4, "This field is required"),
@@ -41,6 +42,8 @@ export function Registerform({ ...props }: React.ComponentProps<typeof Card>) {
     defaultValues: { name: "", email: "", password: "", image: "" },
   });
 
+  const router = useRouter();
+
   const onSubmit = async (value: RegisterFormValues) => {
     const toastId = toast.loading("creating user");
     try {
@@ -51,6 +54,8 @@ export function Registerform({ ...props }: React.ComponentProps<typeof Card>) {
         return;
       }
       toast.success("user created successfully", { id: toastId });
+
+      router.push("/");
     } catch (err) {
       toast.error("something went wrong please try again", { id: toastId });
     }

@@ -31,12 +31,12 @@ export default async function page() {
     <div className="w-full">
       <BannerAndSearch />
       <Hero />
+      <Policy />
       <AllProductAsCustomer
         initialProducts={initialProducts}
         categories={categories}
         diets={diets}
       />
-      <Policy />
       <HowItWorks />
       <About />
       <WhyChooseUs />

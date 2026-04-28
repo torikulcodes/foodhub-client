@@ -82,6 +82,7 @@ interface Navbar1Props {
 }
 
 const Navbar = ({
+
   menu = [
     {
       title: "Meals",
@@ -112,19 +113,20 @@ const Navbar = ({
 
   const [open, setOpen] = useState(false);
 
-
   return (
     <section className={cn("relative w-full", className)}>
       {/* desktop Menu */}
       <div>
-        <div className="items-center justify-between bg-pink-600 shadow p-3">
+        <div className="items-center justify-between bg-pink-600 shadow p-2">
           <Sheet open={open} onOpenChange={setOpen}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <SheetTrigger asChild>
                   <Menu className="size-6 hidden sm:flex" color="white" />
                 </SheetTrigger>
-                <p className="font-['Playwrite_IE'] text-white">FOODHUB BD</p>
+                <p className="text-white text-nowrap pr-2">
+                  BARAKAH <span>FOOD</span>
+                </p>
               </div>
 
               {showSearchbar ? (

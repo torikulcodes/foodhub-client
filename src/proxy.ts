@@ -23,9 +23,7 @@ export async function proxy(request: NextRequest) {
   const isPrivatePath = privatePaths.some((path) => pathName.startsWith(path));
 
   if (isPrivatePath) {
-    const token =
-      request.cookies.get("__Secure-better-auth.session_token") ||
-      request.cookies.get("session_token");
+    const token = request.cookies.get("better-auth.session_token");
 
     if (!token) {
       console.log("No token found. Redirecting...");
