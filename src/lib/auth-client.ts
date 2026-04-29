@@ -3,6 +3,7 @@ import { createAuthClient } from "better-auth/react"; // make sure to import fro
 export const authClient = createAuthClient({
   baseURL: typeof window !== "undefined" ? window.location.origin : "",
   fetchOptions: {
+    
     credentials: "include",
   },
 

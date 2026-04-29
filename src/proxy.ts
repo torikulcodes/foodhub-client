@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { userService } from "./service/user.service";
 
-const privatePaths = [
-  "/admin-dashboard",
-  "/provider-dashboard",
-  "/customer-dashboard",
-];
+// const privatePaths = [
+//   "/admin-dashboard",
+//   "/provider-dashboard",
+//   "/customer-dashboard",
+// ];
 
 export async function proxy(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
@@ -20,16 +20,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const isPrivatePath = privatePaths.some((path) => pathName.startsWith(path));
+  // const isPrivatePath = privatePaths.some((path) => pathName.startsWith(path));
 
-  if (isPrivatePath) {
-    const token = request.cookies.get("better-auth.session_token");
+  // if (isPrivatePath) {
+  //   const token = request.cookies.get("better-auth.session_token");
 
-    if (!token) {
-      console.log("No token found. Redirecting...");
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
+  //   if (!token) {
+  //     console.log("No token found. Redirecting...");
+  //     return NextResponse.redirect(new URL("/login", request.url));
+  //   }
+  // }
 
   if (data && data.user) {
     isAuthenticated = true;
@@ -48,9 +48,9 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (!isAuthenticated && pathName.startsWith("/customer-dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // if (!isAuthenticated && pathName.startsWith("/customer-dashboard")) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
 
   if (
     isAdmin &&
