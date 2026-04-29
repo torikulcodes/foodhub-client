@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 
 export default function Policy() {
+
+
   const policyData = [
     {
       id: "1",
@@ -29,11 +31,12 @@ export default function Policy() {
     },
   ];
 
+
   return (
     <div className="global_width">
       <div className="flex items-center justify-center gap-1 sm:gap-3 w-full">
         {policyData.map((item) => (
-          <div key={item.id} className="bg-white rounded-sm px-2 w-full">
+          <div key={item.id} className="bg-white rounded-sm px-2 w-full hover:shadow-sm hover:scale-105 duration-300">
             <div className="flex flex-col items-center justify-center">
               <div className="relative w-10 h-10 mb-1">
                 <Image

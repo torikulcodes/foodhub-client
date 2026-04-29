@@ -9,12 +9,22 @@ export const adminRoutes = [
       },
       {
         title: "Categories",
-        url: "/admin-dashboard/categories",
+        items: [
+          {
+            title: "Create Category",
+            url: "/admin-dashboard/categories",
+          },
+        ],
       },
 
       {
         title: "Dietary Preferences",
-        url: "/admin-dashboard/dietary-preferences",
+        items: [
+          {
+            title: "Create Diet",
+            url: "/admin-dashboard/dietary-preferences",
+          },
+        ],
       },
     ],
   },

@@ -75,7 +75,7 @@ export function AppSidebar({
                           </SidebarMenuButton>
                         </CollapsibleTrigger>
 
-                        <CollapsibleContent >
+                        <CollapsibleContent>
                           <SidebarMenu className="ml-2">
                             {item.items.map((subItem) => (
                               <SidebarMenuItem key={subItem.title}>

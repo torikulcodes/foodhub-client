@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+IE:wght@100..400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+IE:wght@100..400&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -25,7 +24,6 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
-  --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
@@ -82,7 +80,13 @@
   --sidebar-accent-foreground: oklch(0.18 0.032 28);
   --sidebar-border: oklch(0.94 0.006 265);
   --sidebar-ring: oklch(0.57 0.285 28);
-  --font-playwrite: 'Playwrite IE', sans-serif;
+  --font-playwrite: "Playwrite IE", sans-serif;
+}
+
+:root {
+  --background-one: #db2777; /* pink-600 */
+  --main-background: #fdf2f8;
+  --text-color-one: var(--background-one)
 }
 
 .dark {
@@ -120,7 +124,7 @@
 }
 
 @theme {
-  --font-primary: 'Playwrite IE', sans-serif;
+  --font-primary: "Playwrite IE", sans-serif;
 }
 
 @layer base {
@@ -132,11 +136,10 @@
   }
 }
 
-.global_heading{
-  @apply sm:text-2xl text-lg font-bold tracking-tight
+.global_heading {
+  @apply sm:text-2xl text-lg font-bold tracking-tight;
 }
 
-
-.global_width{
-  @apply mx-auto px-2 max-w-[1800px]
+.global_width {
+  @apply mx-auto px-2 max-w-[1800px];
 }

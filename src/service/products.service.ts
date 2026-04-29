@@ -17,10 +17,13 @@ export const productsService = {
       });
 
       if (!response.ok) {
-        const text = await response.text();
+        const errorData = await response.json().catch(() => null);
+
         return {
           data: null,
-          error: { message: text || "Failed to create category" },
+          error: {
+            message: errorData?.message || "Failed to create product",
+          },
         };
       }
 

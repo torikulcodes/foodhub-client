@@ -6,11 +6,11 @@ import React from "react";
 export default async function page() {
   const { data } = await dietsService.getAllDiets();
 
-//   console.log(data);
+  console.log(data?.data);
   return (
     <div>
       <CreateDiets />
-      <AllDiets data={data?.data?.diets} />
+      <AllDiets data={data?.data} />
     </div>
   );
 }

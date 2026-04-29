@@ -82,7 +82,6 @@ interface Navbar1Props {
 }
 
 const Navbar = ({
-
   menu = [
     {
       title: "Meals",
@@ -117,16 +116,20 @@ const Navbar = ({
     <section className={cn("relative w-full", className)}>
       {/* desktop Menu */}
       <div>
-        <div className="items-center justify-between bg-pink-600 shadow p-2">
+        <div className="items-center justify-between bg-[var(--background-one)] shadow p-2">
           <Sheet open={open} onOpenChange={setOpen}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <SheetTrigger asChild>
                   <Menu className="size-6 hidden sm:flex" color="white" />
                 </SheetTrigger>
-                <p className="text-white text-nowrap pr-2">
-                  BARAKAH <span>FOOD</span>
-                </p>
+                <div className="relative w-20 h-10">
+                  <Image
+                    fill
+                    src="https://i.postimg.cc/9QtCB24c/Chat-GPT-Image-Apr-29-2026-04-46-16-PM-removebg-preview.png"
+                    alt="logo"
+                  ></Image>
+                </div>
               </div>
 
               {showSearchbar ? (

@@ -79,6 +79,7 @@ export function CreateProductForm({
 
       if (res.error) {
         toast.error(res.error.message, { id: toastId });
+        console.log(res.error);
         return;
       }
 
